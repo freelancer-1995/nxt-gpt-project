@@ -32,4 +32,4 @@ class Miner:
         # Gather gradients from all GPUs
         grad_tensors = [param.grad.clone() for param in self.model.parameters()]
         for i in range(1, dist.get_world_size()):
-            dist.send(tensor=grad_tensors[i], dst
+            dist.send(tensor=grad_tensors[i], dst=i+1)
